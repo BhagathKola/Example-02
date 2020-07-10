@@ -1,0 +1,59 @@
+
+{% extends 'common.html' %}
+
+{% block pwn %}
+    {% load static %}
+    <style>
+        h1{
+            font-family: "Agency FB";
+            font-size: 50px;
+            text-align: center;
+        }
+        .district_list
+        {
+            text-align: center;
+            padding: 10px;
+            width: 100px;
+            color: yellow;
+            background-color: blue;
+        }
+    #dtitle
+    {
+        text-align: center;
+            padding: 10px;
+            width: 350px;
+            color: yellow;
+            background-color: blue;
+    }
+    .district_data
+    {
+        text-align: center;
+    }
+    </style>
+    <h1>{{ sname }} ----- State Code - {{ data.statecode }}</h1>
+    <th>
+                <a href="{% url 'refresh' %}?state_name={{ sname }}">
+                    <img src="{% static 'images/refresh.png' %}">
+                </a>
+            </th>
+
+    <table align="center" border="2">
+        <tr>
+            <th id="dtitle">District Name</th>
+            <th class="district_list">Confirmed</th>
+            <th class="district_list">Deceased</th>
+            <th class="district_list">Recovered</th>
+        </tr>
+
+        {% for x,y in data.districtData.items %}
+        <tr>
+            <th> {{ x }}</th>
+            <th class="district_data">{{ y.confirmed }}</th>
+            <th class="district_data" >{{ y.deceased }}</th>
+            <th class="district_data">{{ y.recovered }}</th>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+{% endblock %}
